@@ -5,7 +5,7 @@ from .models import CustomUser
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = UserCreationForm.Meta.fields + ('age', 'phone', 'address', 'date_of_birth',)
+        fields = UserCreationForm.Meta.fields + ('email','age', 'phone', 'address', 'date_of_birth',)
 
 # ແບບຟອມທີ່ໃຊ້ໃນການແກ້ໄຂຂໍ້ມູນຜູ້ໃຊ້ (Update profile ໃນໜ້າ admin)
 class CustomUserChangeForm(UserChangeForm):
