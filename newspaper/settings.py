@@ -1,4 +1,5 @@
 import dj_database_url
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -9,12 +10,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1yms!d6tpz-_1@!jsq#^mxkivj%322xbz20*nyza0_i@gu7fax'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(",")
 
 
 # Application definition
@@ -79,7 +80,8 @@ DATABASES = {
 }
 
 # Override database
-DATABASES['default'] = dj_database_url.parse("postgres://newspaper_django_render_user:z3VwY7eTO9chvAbVLP9EpJYsPiuWFoQw@dpg-coj86jol6cac739slmog-a.oregon-postgres.render.com/newspaper_django_render")
+database_url = os.environ.get('DATABASE_URL')
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
